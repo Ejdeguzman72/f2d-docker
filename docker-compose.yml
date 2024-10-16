@@ -10,13 +10,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
-
-  api-gateway:
-    image: f2d-api-gateway
+      
+  user-authentication:
+    image: f2d-user-authentication
     env_file:
       - .env
     build:
-      context: /home/ej/F2D/f2d-api-gateway
+      context: /home/ej/F2D/f2d-user-authentication
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -27,13 +27,13 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
     depends_on:
       - db
-
-  chatroom:
-    image: f2d-chatroom
+  
+  group-builder:
+    image: f2d-group-builder
     env_file:
       - .env
     build:
-      context: /home/ej/F2D/f2d-chatroom
+      context: /home/ej/F2D/f2d-group-builder
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
@@ -62,12 +62,12 @@ services:
     depends_on:
       - db
 
-  group-builder:
-    image: f2d-group-builder
+  chatroom:
+    image: f2d-chatroom
     env_file:
       - .env
     build:
-      context: /home/ej/F2D/f2d-group-builder
+      context: /home/ej/F2D/f2d-chatroom
       dockerfile: Dockerfile
     ports:
       - "8083:8083"
@@ -79,15 +79,15 @@ services:
     depends_on:
       - db
 
-  user-authentication:
-    image: f2d-user-authentication
+  api-gateway:
+    image: f2d-api-gateway
     env_file:
       - .env
     build:
-      context: /home/ej/F2D/f2d-user-authentication
+      context: /home/ej/F2D/f2d-api-gateway
       dockerfile: Dockerfile
     ports:
-      - "8084:8084"
+      - "9001:9001"
     environment:
       SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
       SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
