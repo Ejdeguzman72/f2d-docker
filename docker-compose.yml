@@ -1,12 +1,22 @@
 version: '3.8'
 
 services:
+  registry:
+    image: f2d-registry
+    env_file:
+      - .env
+    build:
+      context: /home/ej/F2D/f2d-registry
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
   api-gateway:
     image: f2d-api-gateway
     env_file:
       - .env
     build:
-      context: ./api-gateway  # Docker build context specific to each service
+      context: /home/ej/F2D/f2d-api-gateway
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -23,7 +33,7 @@ services:
     env_file:
       - .env
     build:
-      context: ./chatroom
+      context: /home/ej/F2D/f2d-chatroom
       dockerfile: Dockerfile
     ports:
       - "8081:8081"
@@ -40,7 +50,7 @@ services:
     env_file:
       - .env
     build:
-      context: ./event-planner
+      context: /home/ej/F2D/f2d-event-planner
       dockerfile: Dockerfile
     ports:
       - "8082:8082"
@@ -57,7 +67,7 @@ services:
     env_file:
       - .env
     build:
-      context: ./group-builder
+      context: /home/ej/F2D/f2d-group-builder
       dockerfile: Dockerfile
     ports:
       - "8083:8083"
@@ -74,7 +84,7 @@ services:
     env_file:
       - .env
     build:
-      context: ./user-authentication
+      context: /home/ej/F2D/f2d-user-authentication
       dockerfile: Dockerfile
     ports:
       - "8084:8084"
@@ -93,7 +103,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
