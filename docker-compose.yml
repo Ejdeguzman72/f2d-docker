@@ -105,7 +105,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - f2d_postgres_data:/var/lib/postgresql/data  # updated volume name
 
 volumes:
-  postgres_data:
+  f2d_postgres_data:  # matching volume name
